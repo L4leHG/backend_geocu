@@ -1,4 +1,4 @@
-from .models import Terreno, Predio, Unidades
+from .models import Terreno, Predio
 from rest_framework import generics, response
 from .serializer import TerrenoSerializer
 
