@@ -13,8 +13,6 @@ class Predio(models.Model):
     destinacion_economica = models.TextField(null=True)
     clase_suelo = models.TextField(null=True)
         
-
-
     # Returns the string representation of the model.
     def __str__(self):
         return self.npn
