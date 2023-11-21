@@ -8,7 +8,7 @@ class TerrenoSerializer(GeoFeatureModelSerializer):
             geo_field = "geom"
             # you can also explicitly declare which fields you want to include
             # as with a ModelSerializer.
-            fields = ('npn', 'area_digital')
+            fields = ('npn', 'area_digitada')
 
 
 class ConstruccionSerializer(GeoFeatureModelSerializer):
