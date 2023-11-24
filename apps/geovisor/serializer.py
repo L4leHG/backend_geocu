@@ -1,5 +1,6 @@
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
-from apps.geovisor.models import Terreno, Construccion
+from rest_framework import serializers
+from apps.geovisor.models import Terreno, Construccion, Predio
 
 class TerrenoSerializer(GeoFeatureModelSerializer):
     """ A class to serialize locations as GeoJSON compatible data """
@@ -19,3 +20,17 @@ class ConstruccionSerializer(GeoFeatureModelSerializer):
             # you can also explicitly declare which fields you want to include
             # as with a ModelSerializer.
             fields = ('npn', 'identificador','tipo_construccion','area_construida','numero_pisos')
+
+class PredioSerializer(serializers.ModelSerializer):
+    """ A class to serialize locations as GeoJSON compatible data """
+    terrenos = serializers.SerializerMethodField()
+    class Meta:
+            model = Predio
+            # you can also explicitly declare which fields you want to include
+            # as with a ModelSerializer.
+            fields = '__all__'
+    
+    def get_terrenos(self,obj):
+          instance_terreno = Terreno.objects.filter(npn = obj.npn).first()
+          serializer = TerrenoSerializer(instance_terreno)
+          return serializer.data
