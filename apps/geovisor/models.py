@@ -24,7 +24,7 @@ class Terreno(models.Model):
     numero_predial = models.CharField(max_length=20,null=True)
     area_digitada = models.FloatField(null=True)
     codigo_manzana = models.TextField(null=True)
-    lale = models.TextField(null=True)
+    #lale = models.TextField(null=True)
      # GeoDjango-specific: a geometry field (MultiPolygonField)   
     geom = models.MultiPolygonField(srid=4326,null=True)
 

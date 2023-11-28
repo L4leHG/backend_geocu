@@ -24,6 +24,7 @@ class ConstruccionSerializer(GeoFeatureModelSerializer):
 class PredioSerializer(serializers.ModelSerializer):
     """ A class to serialize locations as GeoJSON compatible data """
     terrenos = serializers.SerializerMethodField()
+    construccion = serializers.SerializerMethodField()
     class Meta:
             model = Predio
             # you can also explicitly declare which fields you want to include
@@ -34,3 +35,11 @@ class PredioSerializer(serializers.ModelSerializer):
           instance_terreno = Terreno.objects.filter(npn = obj.npn).first()
           serializer = TerrenoSerializer(instance_terreno)
           return serializer.data
+
+
+    def get_construccion(self,obj):
+        instance_construccion = Construccion.objects.filter(npn = obj.npn)
+        if instance_construccion.exists() == False:
+              return 0 
+        serializer = ConstruccionSerializer(instance_construccion.first())
+        return serializer.data
